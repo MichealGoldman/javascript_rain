@@ -1,12 +1,22 @@
 function storm(){
     let audio = new Audio('audio/Light-rain-and-thunder-sounds.mp3');
-    // let startRain = setInterval(rain(), 1)
-    let startRain = rain(); 
-    function rain()
-    { 
-        for (i = 0; i <= 48.455; i ++){
-            audio.play(); 
-            console.log(i);
-        }
-    };
+
+    function setMyInterval(callback, delay, repetitions)
+    {
+        let x = 0
+        let intervalID = window.setInterval(function () {
+            callback();
+            if(++x === repetitions){
+                window.clearInterval(intervalID);
+            }
+        }, delay);
+    }
+    audio.play(); 
+    setMyInterval(function ()
+    {
+        var d = new Date();
+        console.log(`play_music ${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}`);
+        audio.play(); 
+    },   5000, 108000);
+
 }
